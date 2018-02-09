@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/09 12:56:22 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/09 16:04:50 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ int				main(int ac, char **av)
 		return (-1);
 	}
 	mlx = init_mlx(mlx);
+	mandelbrot(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
+	mlx_loop(mlx->mlx);
 	return (0);
 }

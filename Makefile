@@ -6,7 +6,7 @@
 #    By: cpieri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/09 09:09:41 by cpieri            #+#    #+#              #
-#    Updated: 2018/02/09 09:12:51 by cpieri           ###   ########.fr        #
+#    Updated: 2018/02/09 16:05:47 by cpieri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC_PATH=	src
 
 OBJ_PATH=	obj
 
-SRC_NAME=	main.c
+SRC_NAME=	main.c			\
+			mandelbrot.c	\
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)
 

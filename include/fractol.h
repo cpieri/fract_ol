@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/09 15:10:53 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/09 16:05:22 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ typedef struct		s_com
 }					t_com;
 
 int					main(int ac, char **av);
+void				mandelbrot(t_mlx *mlx);
 
 #endif
