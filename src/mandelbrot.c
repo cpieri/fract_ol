@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/09 16:36:35 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 09:43:29 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		mandelbrot(t_mlx *mlx)
 	double 	i = 0;
 	double	max_i = 1000;
 	double	tmp;
-	int		color = 0xFFFFFF;
+	int		color = 0;
 
 	x = -2.5;
 	y = -1;
@@ -39,7 +39,7 @@ void		mandelbrot(t_mlx *mlx)
 				x = tmp;
 				i++;
 			}
-			color = 50 + i;
+			color = color + 50 + i;
 			mlx->img.data[(py * mlx->img.size_l / 4) + px] = color;
 			px++;
 		}
