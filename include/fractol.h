@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 15:51:44 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:19:05 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 
 //# define W_WIDTH	2550
 //# define W_HEIGHT	1320
-# define W_WIDTH	1000
-# define W_HEIGHT	800
+# define W_WIDTH			1000
+# define W_HEIGHT			800
+# define MotionNotify		6
+# define PointerMotionMask	(1L<<6)
 
 typedef struct		s_point
 {
@@ -48,6 +50,7 @@ typedef struct		s_mlx
 	void			*mlx;
 	void			*win;
 	t_img			img;
+	int				fractal;
 	t_point			p;
 	t_double		mv;
 	double			zoom;
@@ -64,8 +67,10 @@ typedef struct		s_mandel
 }					t_mandel;
 
 void				generate_new_image(t_mlx *mlx);
+int					mouse_event(int button, int x, int y, void *init);
+int					tracer(int x, int y, void *init);
 int					key_event(int key, void *init);
 int					main(int ac, char **av);
-void				mandelbrot(t_mlx *mlx, int ac);
+void				set_fractal(t_mlx *mlx, int ac);
 
 #endif

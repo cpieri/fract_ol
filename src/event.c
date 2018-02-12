@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 14:09:10 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:05:50 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ static void		zoom(int av, t_mlx *mlx)
 {
 	(av == 0) ? mlx->zoom++ : mlx->zoom--;
 	generate_new_image(mlx);
+}
+
+int				tracer(int x, int y, void *init)
+{
+	init = NULL;
+	printf("x = %d, y = %d\n", x, y);
+	return (0);
+}
+
+int				mouse_event(int button, int x, int y, void *init)
+{
+	t_mlx	*mlx;
+
+	x = 0;
+	y = 0;
+	mlx = (t_mlx*)init;
+	if (button == 5)
+		zoom(0, mlx);
+	else if (button == 4)
+		zoom(1, mlx);
+	return (0);
 }
 
 int				key_event(int key, void *init)

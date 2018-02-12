@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 15:56:06 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 16:51:20 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 	nb->i = 0;
 }
 
-void			mandelbrot(t_mlx *mlx, int ac)
+void			set_fractal(t_mlx *mlx, int ac)
 {
 	t_mandel	nb;
-	void	(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
+	void		(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
 	int			col;
 	int 		max_i = 146;
 

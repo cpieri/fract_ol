@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 15:52:38 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 17:22:58 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ static void		print_usage(void)
 	exit(-1);
 }
 
-static void		check_arg(char **av)
+static void		check_arg(char **av, t_mlx *mlx)
 {
-	if (ft_strcmp("mandelbrot", av[1]) != 0 && ft_strcmp("julia", av[1]) != 0)
-		print_usage();
+	if (ft_strcmp("mandelbrot", av[1]) == 0)
+		mlx->fractal = 0;
+	else if (ft_strcmp("julia", av[1]) == 0)
+		mlx->fractal = 1;
 	else
-		return ;
+		print_usage();
+	return ;
 }
 
 static t_mlx	*init_mlx(t_mlx *init)
@@ -38,21 +41,27 @@ static t_mlx	*init_mlx(t_mlx *init)
 	return (init);
 }
 
+static void		put_img_event(t_mlx *mlx)
+{
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
+	mlx_mouse_hook(mlx->win, mouse_event, mlx);
+	mlx_key_hook(mlx->win, key_event, mlx);
+	mlx_hook(mlx->win, MotionNotify, PointerMotionMask, tracer, mlx);mlx_loop(mlx->mlx);
+}
+
 int				main(int ac, char **av)
 {
 	t_mlx	*mlx;
 
 	if (ac != 2)
 		print_usage();
-	check_arg(av);
 	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx)))){
 		ft_putendl("Mlx malloc failed");
 		return (-1);
 	}
+	check_arg(av, mlx);
 	mlx = init_mlx(mlx);
-	mandelbrot(mlx, 1);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
-	mlx_key_hook(mlx->win, key_event, mlx);
-	mlx_loop(mlx->mlx);
+	set_fractal(mlx, mlx->fractal);
+	put_img_event(mlx);
 	return (0);
 }
