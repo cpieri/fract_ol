@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/09 16:04:50 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 15:52:38 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static t_mlx	*init_mlx(t_mlx *init)
 	init->img.img_s = mlx_new_image(init->mlx, W_WIDTH, W_HEIGHT);
 	init->img.data = (int*)mlx_get_data_addr(init->img.img_s, &(init->img.bpp),
 			&(init->img.size_l), &(init->img.endian));
+	init->zoom = 1;
 	return (init);
 }
 
@@ -49,8 +50,9 @@ int				main(int ac, char **av)
 		return (-1);
 	}
 	mlx = init_mlx(mlx);
-	mandelbrot(mlx);
+	mandelbrot(mlx, 1);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
+	mlx_key_hook(mlx->win, key_event, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);
 }

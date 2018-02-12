@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 10:50:32 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/12 15:56:06 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,49 +36,55 @@ const unsigned int color[146] = {
 	0xffe0, 0x9e66, 0x0000
 };
 
-void		mandelbrot(t_mlx *mlx)
+static void		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
-	unsigned int		y = 0;
-	unsigned int		x = 0;
-	double 				zoom = 20;
-	double				start_y = 0.0;
-	double 				start_x = -0.75;
-	double				p_y;
-	double				p_x;
-	double				x1;
-	double 				x2;
-	double				y1;
-	double				y2;
-	unsigned int		max_i = 146;
-	unsigned int		i = 0;
-	unsigned int		colors;
+	mlx->mv.x = 0;
+	mlx->mv.y = 0;
+	nb->re = 1.5 * (x - W_WIDTH / 2) / (0.5 * mlx->zoom * W_WIDTH) + mlx->mv.x;
+	nb->im = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
+	nb->pr = -0.7;
+	nb->pi = 0.27015;
+	nb->tmp = 0;
+	nb->i = 0;
+}
 
+static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
+{
+	mlx->mv.x = -0.5;
+	mlx->mv.y = 0;
+	nb->pr = 1.5 * (x - W_WIDTH / 2) / (0.5 * mlx->zoom * W_WIDTH) + mlx->mv.x;
+	nb->pi = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
+	nb->re = 0;
+	nb->im = 0;
+	nb->tmp = 0;
+	nb->i = 0;
+}
 
-	while (y < W_HEIGHT)
+void			mandelbrot(t_mlx *mlx, int ac)
+{
+	t_mandel	nb;
+	void	(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
+	int			col;
+	int 		max_i = 146;
+
+	mlx->p.y = 0;
+	while (mlx->p.y < W_HEIGHT)
 	{
-		p_y = (W_HEIGHT - y / 2) / (0.5 * zoom * W_HEIGHT) + start_y;
-		while (x < W_WIDTH)
+		mlx->p.x = 0;
+		while (mlx->p.x < W_WIDTH)
 		{
-			p_x = 1.5 * (W_WIDTH - x / 2) / (0.5 * zoom * W_WIDTH) + start_x;
-			x1 = 0;
-			x2 = 0;
-			y1 = 0;
-			y2 = 0;
-			while ((x1 * x1) + (y1 * y1) < 4 && i < max_i)
+			(*f[ac])(&nb, mlx->p.x, mlx->p.y, mlx);
+			while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
 			{
-				x2 = x1;
-				y2 = y1;
-				x1 = x2 * x2 - y2 * y2 + p_x;
-				y1 = 2 * x2 * y2 + p_y;
-				i++;
+				nb.tmp = nb.re;
+				nb.re = (nb.re * nb.re) - (nb.im * nb.im) + nb.pr;
+				nb.im = 2 * (nb.tmp * nb.im) + nb.pi;
+				nb.i++;
 			}
-			colors = color[i];
-			mlx->img.data[(y * mlx->img.size_l / 2) + x] = ((colors >> 11) & 0x1F) << 3;
-			mlx->img.data[(y * mlx->img.size_l / 2) + (x + 1)] = ((colors >> 5) & 0x3F) << 2;
-			mlx->img.data[(y * mlx->img.size_l / 2) + (x + 2)] = (colors & 0x1F) << 3;
-			x++;
+			col = color[nb.i];
+			mlx->img.data[(mlx->p.y * mlx->img.size_l / 4) + mlx->p.x] = col;
+			mlx->p.x++;
 		}
-		y++;
+		mlx->p.y++;
 	}
-
 }
