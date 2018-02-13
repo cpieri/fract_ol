@@ -6,7 +6,7 @@
 #    By: cpieri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/09 09:09:41 by cpieri            #+#    #+#              #
-#    Updated: 2018/02/12 16:44:33 by cpieri           ###   ########.fr        #
+#    Updated: 2018/02/13 15:26:59 by cpieri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME=	main.c			\
 			mandelbrot.c	\
 			img.c			\
 			event.c			\
+			thread.c
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)
 
@@ -44,7 +45,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 			@make -C ./libft
 			@make -C ./minilibx
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(CPPFLAGS) $(FLAGSFT) $(FRAME)
+			$(CC) $(CFLAGS) -lpthread -o $(NAME) $(OBJ) $(CPPFLAGS) $(FLAGSFT) $(FRAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 			@mkdir $(OBJ_PATH) 2> /dev/null || true

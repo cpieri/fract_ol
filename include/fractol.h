@@ -6,13 +6,14 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 17:19:05 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 16:24:53 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# include <pthread.h>
 # include <math.h>
 # include "../minilibx/mlx.h"
 # include "../libft/includes/libft.h"
@@ -54,6 +55,7 @@ typedef struct		s_mlx
 	t_point			p;
 	t_double		mv;
 	double			zoom;
+	int				height;
 }					t_mlx;
 
 typedef struct		s_mandel
@@ -71,6 +73,7 @@ int					mouse_event(int button, int x, int y, void *init);
 int					tracer(int x, int y, void *init);
 int					key_event(int key, void *init);
 int					main(int ac, char **av);
-void				set_fractal(t_mlx *mlx, int ac);
+void				*set_fractal(void *init);
+int					thread(t_mlx *mlx);
 
 #endif

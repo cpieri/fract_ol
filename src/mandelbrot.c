@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 08:45:18 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 16:25:19 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,23 @@ static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 	nb->i = 0;
 }
 
-void			set_fractal(t_mlx *mlx, int ac)
+void			*set_fractal(void *init)
 {
+	t_mlx		*mlx;
 	t_mandel	nb;
 	void		(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
 	int			col;
 	int			max_i;
 
+	mlx = (t_mlx*)init;
 	max_i = 146;
 	mlx->p.y = 0;
-	while (mlx->p.y < W_HEIGHT)
+	while (mlx->p.y < mlx->height)
 	{
 		mlx->p.x = 0;
 		while (mlx->p.x < W_WIDTH)
 		{
-			(*f[ac])(&nb, mlx->p.x, mlx->p.y, mlx);
+			(*f[mlx->fractal])(&nb, mlx->p.x, mlx->p.y, mlx);
 			while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
 			{
 				nb.tmp = nb.re;
@@ -88,4 +90,5 @@ void			set_fractal(t_mlx *mlx, int ac)
 		}
 		mlx->p.y++;
 	}
+	return (NULL);
 }
