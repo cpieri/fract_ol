@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 17:52:59 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 20:41:10 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 void			*set_fractal(void *init)
 {
 	t_mlx		*mlx;
+	t_height	y;
 	t_mandel	nb;
 	void		(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
 	int			col;
 	int			max_i;
 
-	mlx = (t_mlx*)init;
-	printf("seg\n");
+	mlx = ((t_mlx*)init)->mlx;
+	y = ((t_height)init)->y;
 	max_i = 146;
-	while (mlx->y.y < mlx->y.height)
+	while (y.y < y.height)
 	{
 		mlx->p.x = 0;
 		while (mlx->p.x < W_WIDTH)
 		{
-			(*f[mlx->fractal])(&nb, mlx->p.x, mlx->y.y, mlx);
+			(*f[mlx->fractal])(&nb, mlx->p.x, y.y, mlx);
 			while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
 			{
 				nb.tmp = nb.re;
@@ -86,11 +87,11 @@ void			*set_fractal(void *init)
 				nb.i++;
 			}
 			col = color[nb.i];
-			if (mlx->y.y < W_HEIGHT && mlx->p.x < W_WIDTH)
-				mlx->img.data[(mlx->y.y * mlx->img.size_l / 4) + mlx->p.x] = col;
+			if (y.y < W_HEIGHT && mlx->p.x < W_WIDTH)
+				mlx->img.data[(y.y * mlx->img.size_l / 4) + mlx->p.x] = col;
 			mlx->p.x++;
 		}
-		mlx->y.y++;
+		y.y++;
 	}
 	return (NULL);
 }
