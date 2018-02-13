@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 17:05:50 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 08:47:57 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		move_re(int av, t_mlx *mlx)
 	generate_new_image(mlx);
 }
 
-static void		move_im(int	av, t_mlx *mlx)
+static void		move_im(int av, t_mlx *mlx)
 {
 	(av == 0) ? mlx->mv.y++ : mlx->mv.y--;
 	generate_new_image(mlx);
@@ -59,7 +59,6 @@ int				key_event(int key, void *init)
 	void	(*f[4])(int, t_mlx *) = {zoom, move_im, move_re, NULL};
 
 	mlx = (t_mlx*)init;
-	//printf("key : %d\n", key);
 	if (key == 53)
 		exit(0);
 	if (key == 69 || key == 24)

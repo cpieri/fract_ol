@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/12 17:22:58 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 08:46:26 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void		put_img_event(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
 	mlx_mouse_hook(mlx->win, mouse_event, mlx);
 	mlx_key_hook(mlx->win, key_event, mlx);
-	mlx_hook(mlx->win, MotionNotify, PointerMotionMask, tracer, mlx);mlx_loop(mlx->mlx);
+	mlx_hook(mlx->win, MotionNotify, PointerMotionMask, tracer, mlx);
+	mlx_loop(mlx->mlx);
 }
 
 int				main(int ac, char **av)
@@ -55,7 +56,8 @@ int				main(int ac, char **av)
 
 	if (ac != 2)
 		print_usage();
-	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx)))){
+	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx))))
+	{
 		ft_putendl("Mlx malloc failed");
 		return (-1);
 	}
