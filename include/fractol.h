@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 16:24:53 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 18:18:20 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct		s_double
 	double			y;
 }					t_double;
 
+typedef struct		s_height
+{
+	int				y;
+	int				height;
+}					t_height;
+
 typedef struct		s_img
 {
 	void			*img_s;
@@ -55,7 +61,6 @@ typedef struct		s_mlx
 	t_point			p;
 	t_double		mv;
 	double			zoom;
-	int				height;
 }					t_mlx;
 
 typedef struct		s_mandel

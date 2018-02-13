@@ -6,10 +6,11 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 16:25:19 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 17:52:59 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fractol.h"
 
 const unsigned int color[146] = {
@@ -69,14 +70,14 @@ void			*set_fractal(void *init)
 	int			max_i;
 
 	mlx = (t_mlx*)init;
+	printf("seg\n");
 	max_i = 146;
-	mlx->p.y = 0;
-	while (mlx->p.y < mlx->height)
+	while (mlx->y.y < mlx->y.height)
 	{
 		mlx->p.x = 0;
 		while (mlx->p.x < W_WIDTH)
 		{
-			(*f[mlx->fractal])(&nb, mlx->p.x, mlx->p.y, mlx);
+			(*f[mlx->fractal])(&nb, mlx->p.x, mlx->y.y, mlx);
 			while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
 			{
 				nb.tmp = nb.re;
@@ -85,10 +86,11 @@ void			*set_fractal(void *init)
 				nb.i++;
 			}
 			col = color[nb.i];
-			mlx->img.data[(mlx->p.y * mlx->img.size_l / 4) + mlx->p.x] = col;
+			if (mlx->y.y < W_HEIGHT && mlx->p.x < W_WIDTH)
+				mlx->img.data[(mlx->y.y * mlx->img.size_l / 4) + mlx->p.x] = col;
 			mlx->p.x++;
 		}
-		mlx->p.y++;
+		mlx->y.y++;
 	}
 	return (NULL);
 }

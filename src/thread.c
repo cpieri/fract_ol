@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 14:40:06 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 16:25:29 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/13 18:10:56 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include "fractol.h"
-
-void	*teste(void	*ok)
-{
-	ok = NULL;
-	//pthread_exit(NULL);
-	return NULL;
-}
 
 int		thread(t_mlx *mlx)
 {
@@ -31,17 +24,20 @@ int		thread(t_mlx *mlx)
 
 	i = 0;
 	t = W_HEIGHT / 4;
-	printf("t : %d\n", t);
+	mlx->y.y = 0;
+	mlx->y.height = t;
 	while (i != 4)
 	{
-		mlx->height = t;
 		ret = pthread_create(&test[i], NULL, set_fractal, mlx);
-		if (ret == -1){
-			perror("fails");
-			exit(-1);
+		if ((mlx->y.y + t) <= W_HEIGHT && (mlx->y.height + t) <= W_HEIGHT)
+		{
+			mlx->y.y += t;
+			mlx->y.height += t;
+			printf("t : %d, y : %d, height : %d\n", t, mlx->y.y, mlx->y.height);
 		}
-		//pthread_join(test[i], NULL);
 		i++;
 	}
+	while (i >= 0)
+		pthread_join(test[--i], NULL);
 	return (0);
 }
