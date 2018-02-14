@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 08:06:01 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:01:04 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 
 void			*set_fractal(void *init)
 {
-	pthread_mutex_lock(&((t_param*)init)->mutex);
 	t_param		*param;
 	t_mlx			*mlx;
 	t_mandel	nb;
@@ -94,6 +93,5 @@ void			*set_fractal(void *init)
 		}
 		param->y++;
 	}
-	pthread_mutex_unlock(&((t_param*)init)->mutex);
 	return (NULL);
 }

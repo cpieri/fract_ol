@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 14:40:06 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 08:07:13 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:03:22 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		thread(t_mlx *mlx)
 	param[i].mlx = mlx;
 	param[i].y = 0;
 	param[i].height = max_y;
-	pthread_mutex_init(&param[i].mutex, NULL);
 	while (i != MAX_THREAD)
 	{
 		pthread_create(&thread[i], NULL, set_fractal, &param[i]);
@@ -36,7 +35,6 @@ int		thread(t_mlx *mlx)
 			param[i + 1].mlx = mlx;
 			param[i + 1].y = param[i].y + max_y;
 			param[i + 1].height = param[i].height + max_y;
-			pthread_mutex_init(&param[i + 1].mutex, NULL);
 		}
 		i++;
 	}

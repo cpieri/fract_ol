@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 07:38:54 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:00:49 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ typedef struct		s_mlx
 	t_img			img;
 	t_point			p;
 	t_double		mv;
-	double			zoom;
 	int				fractal;
+	double			zoom;
 }					t_mlx;
 
 /*
@@ -85,7 +85,6 @@ typedef struct		s_param
 	t_mlx			*mlx;
 	int				y;
 	int				height;
-	pthread_mutex_t	mutex;
 }					t_param;
 
 /*

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpieri <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/09 09:09:41 by cpieri            #+#    #+#              #
-#    Updated: 2018/02/13 15:26:59 by cpieri           ###   ########.fr        #
+#    Updated: 2018/02/14 11:00:29 by cpieri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_NAME=	main.c			\
 			mandelbrot.c	\
 			img.c			\
 			event.c			\
-			thread.c
+			thread.c		\
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)
 
