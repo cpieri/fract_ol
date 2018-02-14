@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 11:38:12 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 21:08:35 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static t_mlx	*init_mlx(t_mlx *init)
 	init->img.data = (int*)mlx_get_data_addr(init->img.img_s, &(init->img.bpp),
 			&(init->img.size_l), &(init->img.endian));
 	init->zoom = 1;
+	init->tmp.x = 0;
+	init->tmp.y = 0;
+	init->mv_julia = 0;
+	init->julia.x = -0.7;
+	init->julia.y = 0.27015;
 	return (init);
 }
 

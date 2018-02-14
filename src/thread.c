@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 14:40:06 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 11:03:22 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 18:25:43 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,30 @@
 #include <stdlib.h>
 #include "fractol.h"
 
-int		thread(t_mlx *mlx)
+static void		new_param(t_param *param, t_mlx *mlx, int y)
+{
+	int		max;
+
+	max = W_HEIGHT / MAX_THREAD;
+	param->mlx = mlx;
+	param->y = y;
+	param->height = y + max;
+}
+
+int				thread(t_mlx *mlx)
 {
 	pthread_t	thread[MAX_THREAD];
 	t_param		param[MAX_THREAD];
-	int			max_y;
+	int			y;
 	int			i;
 
 	i = 0;
-	max_y = W_HEIGHT / MAX_THREAD;
-	param[i].mlx = mlx;
-	param[i].y = 0;
-	param[i].height = max_y;
+	y = 0;
 	while (i != MAX_THREAD)
 	{
+		new_param(&param[i], mlx, y);
 		pthread_create(&thread[i], NULL, set_fractal, &param[i]);
-		if ((param[i].y + max_y) <= W_HEIGHT && (param[i].height + max_y) <= W_HEIGHT)
-		{
-			param[i + 1].mlx = mlx;
-			param[i + 1].y = param[i].y + max_y;
-			param[i + 1].height = param[i].height + max_y;
-		}
+		y += W_HEIGHT / MAX_THREAD;
 		i++;
 	}
 	while (i >= 0)

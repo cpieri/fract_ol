@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 11:01:04 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 22:19:36 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,16 @@ const unsigned int color[146] = {
 
 static void		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
-	mlx->mv.x = 0;
-	mlx->mv.y = 0;
 	nb->re = 1.5 * (x - W_WIDTH / 2) / (0.5 * mlx->zoom * W_WIDTH) + mlx->mv.x;
 	nb->im = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
-	nb->pr = -0.7;
-	nb->pi = 0.27015;
+	nb->pr = mlx->julia.x;
+	nb->pi = mlx->julia.y;
 	nb->tmp = 0;
 	nb->i = 0;
 }
 
 static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
-	mlx->mv.x = -0.5;
-	mlx->mv.y = 0;
 	nb->pr = 1.5 * (x - W_WIDTH / 2) / (0.5 * mlx->zoom * W_WIDTH) + mlx->mv.x;
 	nb->pi = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
 	nb->re = 0;
@@ -61,37 +57,45 @@ static void		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 	nb->i = 0;
 }
 
+static int		calc_color(t_mandel nb)
+{
+	int		max_i;
+
+	max_i = 146;
+	while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
+	{
+		nb.tmp = nb.re;
+		nb.re = (nb.re * nb.re) - (nb.im * nb.im) + nb.pr;
+		nb.im = 2 * (nb.tmp * nb.im) + nb.pi;
+		nb.i++;
+	}
+	return (color[nb.i]);
+}
+
 void			*set_fractal(void *init)
 {
 	t_param		*param;
-	t_mlx			*mlx;
+	t_mlx		*mlx;
 	t_mandel	nb;
 	void		(*f[3])(t_mandel*, int, int, t_mlx*) = {init_mandelbrot, init_julia, NULL};
 	int			col;
-	int			max_i;
+	int			x;
 
 	param = (t_param*)init;
 	mlx = param->mlx;
-	max_i = 146;
 	while (param->y < param->height)
 	{
-		mlx->p.x = 0;
-		while (mlx->p.x < W_WIDTH)
+		x = 0;
+		while (x < W_WIDTH)
 		{
-			(*f[mlx->fractal])(&nb, mlx->p.x, param->y, mlx);
-			while (((nb.re * nb.re) + (nb.im * nb.im)) < 4 && nb.i < max_i)
-			{
-				nb.tmp = nb.re;
-				nb.re = (nb.re * nb.re) - (nb.im * nb.im) + nb.pr;
-				nb.im = 2 * (nb.tmp * nb.im) + nb.pi;
-				nb.i++;
-			}
-			col = color[nb.i];
-			if (param->y < W_HEIGHT && mlx->p.x < W_WIDTH)
-				mlx->img.data[(param->y * mlx->img.size_l / 4) + mlx->p.x] = col;
-			mlx->p.x++;
+			(*f[mlx->fractal])(&nb, x, param->y, mlx);
+			col = calc_color(nb);
+			if (param->y < W_HEIGHT && x < W_WIDTH)
+				mlx->img.data[(param->y * mlx->img.size_l / 4) + x] = col;
+			x++;
 		}
 		param->y++;
 	}
+	pthread_exit(0);
 	return (NULL);
 }
