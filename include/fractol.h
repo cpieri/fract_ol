@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 11:00:49 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:37:54 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 //# define W_HEIGHT	1320
 # define W_WIDTH			1000
 # define W_HEIGHT			800
-# define MAX_THREAD		50
-# define MotionNotify		6
-# define PointerMotionMask	(1L<<6)
+# define MAX_THREAD		4
+# define MOTIONNOTIFY		6
+# define POINTERMOTIONMASK	(1L<<6)
 
 /*
 ** Struct for new thread

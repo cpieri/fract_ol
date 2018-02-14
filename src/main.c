@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 11:01:21 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 11:38:12 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void		put_img_event(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
 	mlx_mouse_hook(mlx->win, mouse_event, mlx);
 	mlx_key_hook(mlx->win, key_event, mlx);
-	mlx_hook(mlx->win, MotionNotify, PointerMotionMask, tracer, mlx);
+	mlx_hook(mlx->win, MOTIONNOTIFY, POINTERMOTIONMASK, tracer, mlx);
 	mlx_loop(mlx->mlx);
 }
 
