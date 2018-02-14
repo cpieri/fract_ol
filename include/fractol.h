@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 19:52:08 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 07:38:54 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 //# define W_HEIGHT	1320
 # define W_WIDTH			1000
 # define W_HEIGHT			800
+# define MAX_THREAD		50
 # define MotionNotify		6
 # define PointerMotionMask	(1L<<6)
 
 /*
- ** Struct for new thread
- */
+** Struct for new thread
+*/
 
 typedef struct		s_height
 {
@@ -36,8 +37,8 @@ typedef struct		s_height
 }					t_height;
 
 /*
- ** All little struct for t_mlx
- */
+** All little struct for t_mlx
+*/
 
 typedef struct		s_point
 {
@@ -61,8 +62,8 @@ typedef struct		s_img
 }					t_img;
 
 /*
- ** Principal struct for Mlx, Win, Img, Zoom...
- */
+** Principal struct for Mlx, Win, Img, Zoom...
+*/
 
 typedef struct		s_mlx
 {
@@ -76,18 +77,20 @@ typedef struct		s_mlx
 }					t_mlx;
 
 /*
- ** Struct for each thread
- */
+** Struct for each thread
+*/
 
 typedef struct		s_param
 {
 	t_mlx			*mlx;
-	t_height		y;
+	int				y;
+	int				height;
+	pthread_mutex_t	mutex;
 }					t_param;
 
 /*
- **	Struct for calc fractals
- */
+**	Struct for calc fractals
+*/
 
 typedef struct		s_mandel
 {

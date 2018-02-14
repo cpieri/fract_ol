@@ -6,7 +6,7 @@
 /*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 14:40:06 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/13 20:27:46 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/14 08:07:13 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@
 
 int		thread(t_mlx *mlx)
 {
-	pthread_t	thread[4];
-	t_param		param[4];
+	pthread_t	thread[MAX_THREAD];
+	t_param		param[MAX_THREAD];
 	int			max_y;
 	int			i;
 
 	i = 0;
-	max_y = W_HEIGHT / 4;
+	max_y = W_HEIGHT / MAX_THREAD;
 	param[i].mlx = mlx;
-	param[i].y.y = 0;
-	param[i].y.height = max_y;
-	while (i != 4)
+	param[i].y = 0;
+	param[i].height = max_y;
+	pthread_mutex_init(&param[i].mutex, NULL);
+	while (i != MAX_THREAD)
 	{
 		pthread_create(&thread[i], NULL, set_fractal, &param[i]);
-		if ((param[i].y.y + max_y) <= W_HEIGHT && (param[i].y.height + max_y) <= W_HEIGHT)
+		if ((param[i].y + max_y) <= W_HEIGHT && (param[i].height + max_y) <= W_HEIGHT)
 		{
-			param[i].mlx = mlx;
-			param[i].y.y += max_y;
-			param[i].y.height += max_y;
-			//printf("t : %d, y : %d, height : %d\n", t, mlx->y.y, mlx->y.height);
+			param[i + 1].mlx = mlx;
+			param[i + 1].y = param[i].y + max_y;
+			param[i + 1].height = param[i].height + max_y;
+			pthread_mutex_init(&param[i + 1].mutex, NULL);
 		}
 		i++;
 	}
