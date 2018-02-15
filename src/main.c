@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 13:03:49 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 14:22:50 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void		print_usage(void)
 {
-	ft_putendl("Usage : ./fractol [julia / mandelbrot]");
+	ft_putendl("Usage : ./fractol [julia / mandelbrot / burning_ship]");
 	exit(-1);
 }
 

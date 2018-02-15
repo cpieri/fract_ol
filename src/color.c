@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 10:44:51 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 12:14:26 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 14:17:58 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		event_color(int key, t_mlx *mlx)
 		av = 2;
 	else
 		av = 3;
+	free(mlx->color);
 	set_color(mlx, 200, av);
 	generate_new_image(mlx);
 }

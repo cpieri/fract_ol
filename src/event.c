@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 14:05:55 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 14:17:29 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void		reset(t_mlx *mlx)
 	mlx->zoom = 1;
 	mlx->mv.x = 0;
 	mlx->mv.y = 0;
+	free(mlx->color);
 	set_color(mlx, 200, 0);
 	generate_new_image(mlx);
 }
