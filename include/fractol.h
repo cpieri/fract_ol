@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 21:08:05 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 09:49:05 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define POINTERMOTIONMASK	(1L<<6)
 
 /*
- ** All little struct for t_mlx
- */
+** All little struct for t_mlx
+*/
 
 typedef struct		s_point
 {
@@ -52,8 +52,8 @@ typedef struct		s_img
 }					t_img;
 
 /*
- ** Principal struct for Mlx, Win, Img, Zoom...
- */
+** Principal struct for Mlx, Win, Img, Zoom...
+*/
 
 typedef struct		s_mlx
 {
@@ -69,8 +69,8 @@ typedef struct		s_mlx
 }					t_mlx;
 
 /*
- ** Struct for new thread
- */
+** Struct for new thread
+*/
 
 typedef struct		s_height
 {
@@ -79,8 +79,8 @@ typedef struct		s_height
 }					t_height;
 
 /*
- ** Struct for each thread
- */
+** Struct for each thread
+*/
 
 typedef struct		s_param
 {
@@ -90,8 +90,8 @@ typedef struct		s_param
 }					t_param;
 
 /*
- **	Struct for calc fractals
- */
+**	Struct for calc fractals
+*/
 
 typedef struct		s_mandel
 {
@@ -109,6 +109,8 @@ int					tracer(int x, int y, void *init);
 int					key_event(int key, void *init);
 int					main(int ac, char **av);
 void				*set_fractal(void *init);
+void				zoom(int av, t_mlx *mlx);
 int					thread(t_mlx *mlx);
+t_mlx				*reset_mlx(t_mlx *init);
 
 #endif

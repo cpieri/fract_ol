@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 23:58:22 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 10:18:29 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,74 +26,61 @@ static void		move_im(int av, t_mlx *mlx)
 	generate_new_image(mlx);
 }
 
-static void		zoom(int av, t_mlx *mlx)
+static void		reset(t_mlx *mlx)
 {
-	if (av == 1 && mlx->zoom - 0.5 > 0)
-		mlx->zoom -= 0.5;
-	else if (av == 0)
-		mlx->zoom += 0.5;
+	mlx->zoom = 1;
+	mlx->mv.x = 0;
+	mlx->mv.y = 0;
 	generate_new_image(mlx);
 }
 
-int				tracer(int x, int y, void *init)
+static int		select_index(int key, int *i)
 {
-	t_mlx	*mlx;
+	int		tmp;
 
-	mlx = (t_mlx*)init;
-	if (x >= 0 && x <= W_WIDTH && y >= 0 && y <= W_HEIGHT && mlx->mv_julia == 0)
+	tmp = key;
+	if (key == 69 || key == 24 || key == 78 || key == 27)
 	{
-		mlx->julia.y = (y - W_HEIGHT / 2) / (600 - mlx->zoom * 2);
-		mlx->julia.x = (x - W_WIDTH / 2) / (600 - mlx->zoom * 2);
-		generate_new_image(mlx);
-		mlx->tmp.x = x;
-		mlx->tmp.y = y;
-		printf("x = %d, y = %d\n", x, y);
+		if (key == 78 || key == 27)
+			*i = 1;
+		return (0);
 	}
-	return (0);
-}
-
-int				mouse_event(int button, int x, int y, void *init)
-{
-	t_mlx	*mlx;
-
-	x = 0;
-	y = 0;
-	mlx = (t_mlx*)init;
-	if (button == 5)
+	else if (key == 126 || key == 125)
 	{
-		mlx->mv.y = (y / W_HEIGHT - mlx->mv.y) / mlx->zoom;
-		mlx->mv.x = (x / W_WIDTH - mlx->mv.x) / mlx->zoom;
-		//mlx->mv.x += ((mlx->zoom + 0.5) / 2) - (x / (mlx->zoom + 0.5));
-		zoom(0, mlx);
+		if (key == 125)
+			*i = 1;
+		return (1);
 	}
-	if (button == 4)
+	else if (key == 124 || key == 123)
 	{
-		zoom(1, mlx);
+		if (key == 124)
+			*i = 1;
+		return (2);
 	}
-	if (button == 1)
-		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
-	return (0);
+	return (3);
 }
 
 int				key_event(int key, void *init)
 {
 	t_mlx	*mlx;
-	void	(*f[4])(int, t_mlx *) = {zoom, move_im, move_re, NULL};
+	int		neg;
+	int		index;
+	void	(*f[4])(int, t_mlx *);
 
+	f[0] = zoom;
+	f[1] = move_im;
+	f[2] = move_re;
+	f[3] = NULL;
 	mlx = (t_mlx*)init;
+	neg = 0;
+	index = select_index(key, &neg);
+	if (index != 3)
+		(*f[index])(neg, mlx);
 	if (key == 53)
 		exit(0);
-	if (key == 69 || key == 24)
-		(*f[0])(0, mlx);
-	else if (key == 78 || key == 27)
-		(*f[0])(1, mlx);
-	else if (key == 126)
-		(*f[1])(0, mlx);
-	else if (key == 125)
-		(*f[1])(1, mlx);
-	else if (key == 124)
-		(*f[2])(0, mlx);
-	else if (key == 123)
-		(*f[2])(1, mlx);
+	if (key == 15)
+		reset(mlx);
+	if (key == 49)
+		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/14 21:08:35 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 10:19:37 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int				main(int ac, char **av)
 	check_arg(av, mlx);
 	mlx = init_mlx(mlx);
 	thread(mlx);
-	//set_fractal(mlx);
 	put_img_event(mlx);
 	return (0);
 }
