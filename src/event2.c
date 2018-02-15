@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 07:35:34 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 10:19:21 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 12:07:31 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int				tracer(int x, int y, void *init)
 		generate_new_image(mlx);
 		mlx->tmp.x = x;
 		mlx->tmp.y = y;
-		printf("x = %d, y = %d\n", x, y);
 	}
 	return (0);
 }

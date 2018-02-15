@@ -6,7 +6,7 @@
 #    By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/09 09:09:41 by cpieri            #+#    #+#              #
-#    Updated: 2018/02/15 10:09:22 by cpieri           ###   ########.fr        #
+#    Updated: 2018/02/15 10:59:11 by cpieri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_NAME=	main.c			\
 			event2.c		\
 			zoom.c			\
 			thread.c		\
+			color.c
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)
 

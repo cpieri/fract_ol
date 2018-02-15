@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 10:43:54 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 12:06:11 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct		s_mlx
 	t_point			tmp;
 	t_double		mv;
 	t_double		julia;
+	int					*color;
+	int					max_col;
 	int				fractal;
 	int				mv_julia;
 	double			zoom;
@@ -108,7 +110,9 @@ int					key_event(int key, void *init);
 int					main(int ac, char **av);
 void				*set_fractal(void *init);
 void				zoom(int av, t_mlx *mlx);
+void				event_color(int key, t_mlx *mlx);
 int					thread(t_mlx *mlx);
 t_mlx				*reset_mlx(t_mlx *init);
+int					set_color(t_mlx *mlx, int nb, int av);
 
 #endif

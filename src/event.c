@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 10:18:29 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 12:12:43 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void		reset(t_mlx *mlx)
 	mlx->zoom = 1;
 	mlx->mv.x = 0;
 	mlx->mv.y = 0;
+	set_color(mlx, 200, 0);
 	generate_new_image(mlx);
 }
 
@@ -74,13 +75,17 @@ int				key_event(int key, void *init)
 	mlx = (t_mlx*)init;
 	neg = 0;
 	index = select_index(key, &neg);
+	printf("%d\n", key);
 	if (index != 3)
 		(*f[index])(neg, mlx);
-	if (key == 53)
+	else if (key == 53)
 		exit(0);
-	if (key == 15)
+	else if (key == 15)
 		reset(mlx);
-	if (key == 49)
+	else if (key == 49)
 		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
+	else if (key == 17 || key == 11 || key == 5
+		|| key == 13 || key == 12 || key == 0)
+		event_color(key, mlx);
 	return (0);
 }
