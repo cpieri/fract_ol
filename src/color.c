@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 10:44:51 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 14:17:58 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 17:03:08 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	check_color(int av)
 	else if (av == 1)
 		return (0x030303);
 	else if (av == 2)
-		return (150);
+		return (0xF00FDF);
 	else if (av == 3)
 		return (600);
 	else if (av == 4)
