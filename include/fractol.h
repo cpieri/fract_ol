@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 09:49:05 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 10:43:54 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "../minilibx/mlx.h"
 # include "../libft/includes/libft.h"
 
-//# define W_WIDTH	2550
-//# define W_HEIGHT	1320
 # define W_WIDTH			1000
 # define W_HEIGHT			800
 # define MAX_THREAD			4
