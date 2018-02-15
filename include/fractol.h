@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 12:06:11 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 14:02:53 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 # define MAX_THREAD			4
 # define MOTIONNOTIFY		6
 # define POINTERMOTIONMASK	(1L<<6)
-
-/*
-** All little struct for t_mlx
-*/
 
 typedef struct		s_point
 {
@@ -49,10 +45,6 @@ typedef struct		s_img
 	int				endian;
 }					t_img;
 
-/*
-** Principal struct for Mlx, Win, Img, Zoom...
-*/
-
 typedef struct		s_mlx
 {
 	void			*mlx;
@@ -61,16 +53,12 @@ typedef struct		s_mlx
 	t_point			tmp;
 	t_double		mv;
 	t_double		julia;
-	int					*color;
-	int					max_col;
+	int				*color;
+	int				max_col;
 	int				fractal;
 	int				mv_julia;
 	double			zoom;
 }					t_mlx;
-
-/*
-** Struct for new thread
-*/
 
 typedef struct		s_height
 {
@@ -78,20 +66,12 @@ typedef struct		s_height
 	int				height;
 }					t_height;
 
-/*
-** Struct for each thread
-*/
-
 typedef struct		s_param
 {
 	t_mlx			*mlx;
 	int				y;
 	int				height;
 }					t_param;
-
-/*
-**	Struct for calc fractals
-*/
 
 typedef struct		s_mandel
 {
@@ -103,16 +83,18 @@ typedef struct		s_mandel
 	int				i;
 }					t_mandel;
 
-void				generate_new_image(t_mlx *mlx);
 int					mouse_event(int button, int x, int y, void *init);
 int					tracer(int x, int y, void *init);
 int					key_event(int key, void *init);
 int					main(int ac, char **av);
+int					thread(t_mlx *mlx);
+int					init_ship(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					set_color(t_mlx *mlx, int nb, int av);
 void				*set_fractal(void *init);
 void				zoom(int av, t_mlx *mlx);
 void				event_color(int key, t_mlx *mlx);
-int					thread(t_mlx *mlx);
+void				generate_new_image(t_mlx *mlx);
+void				ft_exit(t_mlx *mlx);
 t_mlx				*reset_mlx(t_mlx *init);
-int					set_color(t_mlx *mlx, int nb, int av);
 
 #endif

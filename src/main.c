@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 11:53:33 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 13:03:49 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void		check_arg(char **av, t_mlx *mlx)
 		mlx->fractal = 0;
 	else if (ft_strcmp("julia", av[1]) == 0)
 		mlx->fractal = 1;
+	else if (ft_strcmp("burning_ship", av[1]) == 0)
+		mlx->fractal = 2;
 	else
 		print_usage();
 	return ;

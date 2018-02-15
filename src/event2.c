@@ -6,11 +6,10 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 07:35:34 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 12:07:31 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/15 14:05:00 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "fractol.h"
 
