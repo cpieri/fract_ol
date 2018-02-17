@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 14:02:53 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/16 11:43:47 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,16 @@
 # define W_HEIGHT			800
 # define MAX_THREAD			4
 # define MOTIONNOTIFY		6
+# define KEYPRESS			2
+# define KEYPRESSMASK		(1L<<0)
 # define POINTERMOTIONMASK	(1L<<6)
+# define EXIT				53
+# define RESET				15
+# define SPACE				49
+# define ZOOM_UP			69
+# define ZOOM_DOWN			78
+# define ZOOM_UP2			24
+# define ZOOM_DOWN2			27
 
 typedef struct		s_point
 {
@@ -92,6 +101,7 @@ int					init_ship(t_mandel *nb, int x, int y, t_mlx *mlx);
 int					set_color(t_mlx *mlx, int nb, int av);
 void				*set_fractal(void *init);
 void				zoom(int av, t_mlx *mlx);
+void				move_re(int av, t_mlx *mlx);
 void				event_color(int key, t_mlx *mlx);
 void				generate_new_image(t_mlx *mlx);
 void				ft_exit(t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 10:07:43 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 10:08:58 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/16 10:20:06 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void			zoom(int av, t_mlx *mlx)
 {
-	if (av == 1 && mlx->zoom - 0.5 > 0)
-		mlx->zoom -= 0.5;
+	if (av == 1 && (mlx->zoom - 0.5) / 2 > 0)
+		mlx->zoom = (mlx->zoom - 0.5) / 2;
 	else if (av == 0)
-		mlx->zoom += 0.5;
+		mlx->zoom = (mlx->zoom + 0.5) * 2;
 	generate_new_image(mlx);
 }
