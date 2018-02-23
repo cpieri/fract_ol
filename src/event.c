@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/17 17:11:26 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/23 15:39:14 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,21 @@ int				key_event(int key, void *init)
 	t_mlx	*mlx;
 	int		neg;
 	int		index;
-	void	(*f[4])(int, t_mlx *);
+	void	(*f[4][2])(int, t_mlx *);
 
-	f[0] = zoom;
-	f[1] = move_im;
-	f[2] = move_re;
+	f[0][0] = ft_itoa(69);
+	f[0][1] = zoom;
+	f[1][0] = ft_itoa(125);
+	f[1][1] = move_im;
+	f[2][0] = ft_itoa(124);
+	f[2][1] = move_re;
 	f[3] = NULL;
 	mlx = (t_mlx*)init;
 	neg = 0;
 	index = select_index(key, &neg);
+
+	void 	(*f[4][2])(int, t_mlx*);
+
 	//ft_putnbr(key), ft_putchar('\n');
 	if (index != 3)
 		(*f[index])(neg, mlx);
