@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/23 15:39:14 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/24 12:45:40 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,91 +25,67 @@ static void		move_im(int av, t_mlx *mlx)
 	generate_new_image(mlx);
 }
 
-static void		reset(t_mlx *mlx)
+static void		select_index(void (*f[5][3])(int, t_mlx*), int *neg, int key)
 {
-	mlx->zoom = 1;
-	mlx->mv.x = 0;
-	mlx->mv.y = 0;
-	free(mlx->color);
-	set_color(mlx, 200, 0);
-	generate_new_image(mlx);
+	if (key == LEFT || key == DOWN || key == ZOOM_DOWN || key == ZOOM_DOWN2)
+		*neg = 1;
+	f[0][0] = (void*)ft_itoa(LEFT);
+	f[0][1] = (void*)ft_itoa(RIGHT);
+	f[0][2] = move_re;
+	f[1][0] = (void*)ft_itoa(UP);
+	f[1][1] = (void*)ft_itoa(DOWN);
+	f[1][2] = move_im;
+	f[2][0] = (void*)ft_itoa(ZOOM_UP);
+	f[2][1] = (void*)ft_itoa(ZOOM_DOWN);
+	f[2][2] = zoom;
+	f[3][0] = (void*)ft_itoa(ZOOM_UP2);
+	f[3][1] = (void*)ft_itoa(ZOOM_DOWN2);
+	f[3][2] = zoom;
 }
 
-static int		select_index(int key, int *i)
+static int		event(int key, t_mlx *mlx)
 {
-	int		tmp;
-
-	tmp = key;
-	if (key == ZOOM_UP || key == ZOOM_UP2 || key == ZOOM_DOWN
-			|| key == ZOOM_DOWN2)
-	{
-		if (key == ZOOM_DOWN || key == ZOOM_DOWN2)
-			*i = 1;
-		return (0);
-	}
-	else if (key == 126 || key == 125)
-	{
-		if (key == 126)
-			*i = 1;
-		return (1);
-	}
-	else if (key == 124 || key == 123)
-	{
-		if (key == 123)
-			*i = 1;
-		return (2);
-	}
-	return (3);
-}
-
-static void		change_fractal(int frac, t_mlx *mlx)
-{
-	if (frac == 0)
-		mlx->fractal = 0;
-	else if (frac == 1)
-		mlx->fractal = 1;
-	else if (frac == 2)
-		mlx->fractal = 2;
-	generate_new_image(mlx);
-}
-
-int				key_event(int key, void *init)
-{
-	t_mlx	*mlx;
-	int		neg;
-	int		index;
-	void	(*f[4][2])(int, t_mlx *);
-
-	f[0][0] = ft_itoa(69);
-	f[0][1] = zoom;
-	f[1][0] = ft_itoa(125);
-	f[1][1] = move_im;
-	f[2][0] = ft_itoa(124);
-	f[2][1] = move_re;
-	f[3] = NULL;
-	mlx = (t_mlx*)init;
-	neg = 0;
-	index = select_index(key, &neg);
-
-	void 	(*f[4][2])(int, t_mlx*);
-
-	//ft_putnbr(key), ft_putchar('\n');
-	if (index != 3)
-		(*f[index])(neg, mlx);
-	else if (key == 18)
-		change_fractal(0, mlx);
-	else if (key == 19)
-		change_fractal(1, mlx);
-	else if (key == 20)
-		change_fractal(2, mlx);
-	else if (key == EXIT)
+	if (key == EXIT)
 		ft_exit(mlx);
 	else if (key == RESET)
 		reset(mlx);
 	else if (key == SPACE)
 		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
+	else if (key == 18 || key == 19 || key == 20)
+	{
+		if (key == 18)
+			mlx->fractal = 0;
+		else if (key == 19)
+			mlx->fractal = 1;
+		else if (key == 20)
+			mlx->fractal = 2;
+		generate_new_image(mlx);
+	}
 	else if (key == 17 || key == 11 || key == 5
 			|| key == 13 || key == 12 || key == 0)
 		event_color(key, mlx);
+	return (0);
+}
+
+int				key_event(int key, void *init)
+{
+	t_mlx	*mlx;
+	int		i;
+	int		neg;
+	void	(*f[5][3])(int, t_mlx *);
+
+	mlx = (t_mlx*)init;
+	i = 0;
+	neg = 0;
+	select_index(f, &neg, key);
+	event(key, mlx);
+	while (key != ft_atoi((char*)f[i][0]) && key != ft_atoi((char*)f[i][1]))
+	{
+		if (i > 3)
+			break ;
+		i++;
+	}
+	if (i <= 3)
+		(*f[i][2])(neg, mlx);
 	return (0);
 }

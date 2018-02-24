@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/16 11:43:47 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/24 12:14:12 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # define ZOOM_DOWN			78
 # define ZOOM_UP2			24
 # define ZOOM_DOWN2			27
+# define LEFT				123
+# define RIGHT				124
+# define UP					125
+# define DOWN				126
 
 typedef struct		s_point
 {
@@ -105,6 +109,7 @@ void				move_re(int av, t_mlx *mlx);
 void				event_color(int key, t_mlx *mlx);
 void				generate_new_image(t_mlx *mlx);
 void				ft_exit(t_mlx *mlx);
+void				reset(t_mlx *mlx);
 t_mlx				*reset_mlx(t_mlx *init);
 
 #endif
