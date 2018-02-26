@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/24 12:45:40 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 09:12:22 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ static void		select_index(void (*f[5][3])(int, t_mlx*), int *neg, int key)
 	f[3][0] = (void*)ft_itoa(ZOOM_UP2);
 	f[3][1] = (void*)ft_itoa(ZOOM_DOWN2);
 	f[3][2] = zoom;
+	f[4][0] = (void*)ft_itoa(0);
+	f[4][1] = (void*)ft_itoa(0);
+	f[4][2] = NULL;
 }
 
 static int		event(int key, t_mlx *mlx)
@@ -85,7 +88,7 @@ int				key_event(int key, void *init)
 			break ;
 		i++;
 	}
-	if (i <= 3)
+	if (i < 4)
 		(*f[i][2])(neg, mlx);
 	return (0);
 }
