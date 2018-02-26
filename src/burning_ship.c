@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 12:46:41 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/15 13:18:20 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 09:19:45 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ship_color(t_mandel *nb, t_mlx *mlx)
 		nb->tmp = (nb->re * nb->re) - (nb->im * nb->im) + nb->pr;
 		nb->im = fabs(2 * (nb->re * nb->im) + nb->pi);
 		nb->re = fabs(nb->tmp);
-		nb->i++;
+		++nb->i;
 	}
 	if (nb->i < mlx->max_col)
 		return (mlx->color[nb->i]);

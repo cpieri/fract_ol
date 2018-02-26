@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:59:28 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/24 12:13:45 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 10:02:42 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_exit(t_mlx *mlx)
 void	reset(t_mlx *mlx)
 {
 	mlx->zoom = 1;
-	mlx->mv.x = 0;
+	mlx->mv.x = (mlx->fractal != 1) ? -0.5 : 0;
 	mlx->mv.y = 0;
 	free(mlx->color);
 	set_color(mlx, 200, 0);

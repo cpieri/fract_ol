@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/16 11:11:09 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 10:12:11 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		check_arg(char **av, t_mlx *mlx)
 		mlx->fractal = 0;
 	else if (ft_strcmp("julia", av[1]) == 0)
 		mlx->fractal = 1;
-	else if (ft_strcmp("burning_ship", av[1]) == 0)
+	else if (ft_strcmp("ship", av[1]) == 0)
 		mlx->fractal = 2;
 	else
 		print_usage();
@@ -41,8 +41,8 @@ static t_mlx	*init_mlx(t_mlx *init)
 			&(init->img.size_l), &(init->img.endian));
 	set_color(init, 200, 0);
 	init->zoom = 1;
-	init->tmp.x = 0;
-	init->tmp.y = 0;
+	init->mv.x = (init->fractal != 1) ? -0.5 : 0;
+	init->mv.y = 0;
 	init->mv_julia = 0;
 	init->julia.x = -0.7;
 	init->julia.y = 0.27015;

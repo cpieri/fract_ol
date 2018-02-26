@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/16 10:48:08 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 10:31:05 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		calc_color(t_mandel *nb, t_mlx *mlx)
 		nb->tmp = nb->re;
 		nb->re = (nb->re * nb->re) - (nb->im * nb->im) + nb->pr;
 		nb->im = 2 * (nb->tmp * nb->im) + nb->pi;
-		nb->i++;
+		++nb->i;
 	}
 	if (nb->i < mlx->max_col)
 		return (mlx->color[nb->i]);

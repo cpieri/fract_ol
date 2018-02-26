@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 09:12:22 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/26 10:03:30 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int		event(int key, t_mlx *mlx)
 			mlx->fractal = 1;
 		else if (key == 20)
 			mlx->fractal = 2;
-		generate_new_image(mlx);
+		reset(mlx);
 	}
 	else if (key == 17 || key == 11 || key == 5
 			|| key == 13 || key == 12 || key == 0)
