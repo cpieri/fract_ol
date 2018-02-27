@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 10:03:30 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 09:10:02 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int				key_event(int key, void *init)
 	}
 	if (i < 4)
 		(*f[i][2])(neg, mlx);
+	ft_free_f(f);
 	return (0);
 }

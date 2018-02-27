@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:59:28 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 10:02:42 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 09:12:56 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ void	reset(t_mlx *mlx)
 	free(mlx->color);
 	set_color(mlx, 200, 0);
 	generate_new_image(mlx);
+}
+
+void	ft_free_f(void (*f[5][3])(int, t_mlx*))
+{
+	int		i;
+	int		y;
+
+	i = 0;
+	while (i <= 4)
+	{
+		y = 0;
+		while (y <= 1)
+			free(f[i][y++]);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 10:32:49 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 09:13:31 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void				event_color(int key, t_mlx *mlx);
 void				generate_new_image(t_mlx *mlx);
 void				ft_exit(t_mlx *mlx);
 void				reset(t_mlx *mlx);
+void				ft_free_f(void (*f[5][3])(int, t_mlx*));
 t_mlx				*reset_mlx(t_mlx *init);
 
 #endif
