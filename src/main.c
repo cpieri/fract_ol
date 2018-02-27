@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 10:12:11 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:45:44 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void		print_usage(void)
 {
-	ft_putendl("Usage : ./fractol [julia / mandelbrot / burning_ship]");
+	ft_putendl("Usage : ./fractol :\n[1] : julia\n[2] : mandelbrot\n[3] : ship");
+	ft_putendl("[4] : mandel_2\n[5] : julia_2");
 	exit(-1);
 }
 
@@ -27,6 +28,10 @@ static void		check_arg(char **av, t_mlx *mlx)
 		mlx->fractal = 1;
 	else if (ft_strcmp("ship", av[1]) == 0)
 		mlx->fractal = 2;
+	else if (ft_strcmp("mandel_2", av[1]) == 0)
+			mlx->fractal = 3;
+	else if (ft_strcmp("julia_2", av[1]) == 0)
+			mlx->fractal = 4;
 	else
 		print_usage();
 	return ;

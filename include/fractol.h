@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 09:13:31 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 12:47:45 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,12 @@ int					main(int ac, char **av);
 int					thread(t_mlx *mlx);
 int					init_ship(t_mandel *nb, int x, int y, t_mlx *mlx);
 int					set_color(t_mlx *mlx, int nb, int av);
+int					calc_color(t_mandel *nb, t_mlx *mlx);
+int					init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_julia(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_mandel_2(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_julia_2(t_mandel *nb, int x, int y, t_mlx *mlx);
+void				init_f(int (*f[4])(t_mandel*, int, int, t_mlx*));
 void				*set_fractal(void *init);
 void				zoom(int av, t_mlx *mlx);
 void				move_re(int av, t_mlx *mlx);

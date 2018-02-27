@@ -6,7 +6,7 @@
 #    By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/09 09:09:41 by cpieri            #+#    #+#              #
-#    Updated: 2018/02/15 14:27:47 by cpieri           ###   ########.fr        #
+#    Updated: 2018/02/27 12:50:29 by cpieri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_NAME=	main.c			\
 			thread.c		\
 			color.c			\
 			burning_ship.c	\
+			bonus.c			\
 			exit.c
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)

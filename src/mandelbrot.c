@@ -6,13 +6,13 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/26 10:31:05 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 11:55:33 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int		calc_color(t_mandel *nb, t_mlx *mlx)
+int		calc_color(t_mandel *nb, t_mlx *mlx)
 {
 	while (((nb->re * nb->re) + (nb->im * nb->im)) < 4 && nb->i < mlx->max_col)
 	{
@@ -26,7 +26,7 @@ static int		calc_color(t_mandel *nb, t_mlx *mlx)
 	return (0);
 }
 
-static int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
+int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
 	int	col;
 
@@ -40,7 +40,7 @@ static int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 	return (col);
 }
 
-static int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
+int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
 	int	col;
 
@@ -58,14 +58,12 @@ void			*set_fractal(void *init)
 {
 	t_param		*param;
 	t_mandel	nb;
-	int			(*f[3])(t_mandel*, int, int, t_mlx*);
+	int			(*f[5])(t_mandel*, int, int, t_mlx*);
 	int			col;
 	int			x;
 
 	param = (t_param*)init;
-	f[0] = init_mandelbrot;
-	f[1] = init_julia;
-	f[2] = init_ship;
+	init_f(f);
 	while (param->y < param->height)
 	{
 		x = 0;
