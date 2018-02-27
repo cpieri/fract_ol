@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:13:45 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 13:38:47 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 14:30:10 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static void		print_usage(void)
 {
-	ft_putendl("Usage : ./fractol :\n[1] : julia\n[2] : mandelbrot\n[3] : ship");
-	ft_putendl("[4] : mandel_2\n[5] : julia_2");
+	ft_putendl("Usage : ./fractol :\n[1] : julia\n[2] : mandelbrot\n");
+	ft_putendl("[3] : ship\n[4] : mandel_2\n[5] : julia_2");
 	exit(-1);
 }
 
@@ -56,6 +56,10 @@ static t_mlx	*init_mlx(t_mlx *init)
 
 static void		put_img_event(t_mlx *mlx)
 {
+	ft_putendl("Touch :\n[1] Color : Q, A, W, T, G, B");
+	ft_putendl("[2] Zoom : mouse, +, -\n[3] Change fractal : 1, 2, 3, 4, 5");
+	ft_putendl("[4] Move : up/down, left/right, mouse left/mouse right");
+	ft_putendl("[5] Stop julia : space, click left\n[6] Reset : R");
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img_s, 0, 0);
 	mlx_mouse_hook(mlx->win, mouse_event, mlx);
 	mlx_hook(mlx->win, KEYPRESS, KEYPRESSMASK, key_event, mlx);
