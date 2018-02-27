@@ -6,13 +6,13 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 12:46:41 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 12:48:00 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:40:44 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	ship_color(t_mandel *nb, t_mlx *mlx)
+int		ship_color(t_mandel *nb, t_mlx *mlx)
 {
 	while ((nb->re * nb->re) + (nb->im * nb->im) < 4 && nb->i < mlx->max_col)
 	{
@@ -26,7 +26,7 @@ static int	ship_color(t_mandel *nb, t_mlx *mlx)
 	return (0);
 }
 
-int			init_ship(t_mandel *nb, int x, int y, t_mlx *mlx)
+int		init_ship(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
 	int		col;
 
@@ -34,20 +34,6 @@ int			init_ship(t_mandel *nb, int x, int y, t_mlx *mlx)
 	nb->pi = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
 	nb->re = 0;
 	nb->im = 0;
-	nb->tmp = 0;
-	nb->i = 0;
-	col = ship_color(nb, mlx);
-	return (col);
-}
-
-int		init_julia_2(t_mandel *nb, int x, int y, t_mlx *mlx)
-{
-	int	col;
-
-	nb->pr = 0.271543;
-	nb->pi = -0.271271;
-	nb->re = 1.5 * (x - W_WIDTH / 2) / (0.5 * mlx->zoom * W_WIDTH) + mlx->mv.x;
-	nb->im = (y - W_HEIGHT / 2) / (0.5 * mlx->zoom * W_HEIGHT) + mlx->mv.y;
 	nb->tmp = 0;
 	nb->i = 0;
 	col = ship_color(nb, mlx);

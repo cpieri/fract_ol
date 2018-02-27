@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 09:10:02 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:37:21 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int		event(int key, t_mlx *mlx)
 		reset(mlx);
 	else if (key == SPACE)
 		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
-	else if (key == 18 || key == 19 || key == 20)
+	else if (key == 18 || key == 19 || key == 20 || key == 21 || key == 23)
 	{
 		if (key == 18)
 			mlx->fractal = 0;
@@ -62,6 +62,10 @@ static int		event(int key, t_mlx *mlx)
 			mlx->fractal = 1;
 		else if (key == 20)
 			mlx->fractal = 2;
+		else if (key == 21)
+			mlx->fractal = 3;
+		else if (key == 23)
+			mlx->fractal = 4;
 		reset(mlx);
 	}
 	else if (key == 17 || key == 11 || key == 5

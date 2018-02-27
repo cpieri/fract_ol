@@ -6,13 +6,13 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 11:55:33 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:23:10 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		calc_color(t_mandel *nb, t_mlx *mlx)
+int				calc_color(t_mandel *nb, t_mlx *mlx)
 {
 	while (((nb->re * nb->re) + (nb->im * nb->im)) < 4 && nb->i < mlx->max_col)
 	{
@@ -26,7 +26,7 @@ int		calc_color(t_mandel *nb, t_mlx *mlx)
 	return (0);
 }
 
-int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
+static int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
 	int	col;
 
@@ -40,7 +40,7 @@ int		init_julia(t_mandel *nb, int x, int y, t_mlx *mlx)
 	return (col);
 }
 
-int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
+static int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 {
 	int	col;
 
@@ -52,6 +52,15 @@ int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 	nb->i = 0;
 	col = calc_color(nb, mlx);
 	return (col);
+}
+
+static void		init_f(int (*f[5])(t_mandel*, int, int, t_mlx*))
+{
+	f[0] = init_mandelbrot;
+	f[1] = init_julia;
+	f[2] = init_ship;
+	f[3] = init_mandel_2;
+	f[4] = init_julia_2;
 }
 
 void			*set_fractal(void *init)
