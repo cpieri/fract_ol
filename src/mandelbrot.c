@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:34:05 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 13:23:10 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/28 08:19:27 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,22 @@ static int		init_mandelbrot(t_mandel *nb, int x, int y, t_mlx *mlx)
 	return (col);
 }
 
-static void		init_f(int (*f[5])(t_mandel*, int, int, t_mlx*))
+static void		init_f(int (*f[6])(t_mandel*, int, int, t_mlx*))
 {
 	f[0] = init_mandelbrot;
 	f[1] = init_julia;
 	f[2] = init_ship;
 	f[3] = init_mandel_2;
-	f[4] = init_julia_2;
+	f[4] = init_julia_ship;
+	f[5] = init_multibrot;
+	f[6] = init_dragon;
 }
 
 void			*set_fractal(void *init)
 {
 	t_param		*param;
 	t_mandel	nb;
-	int			(*f[5])(t_mandel*, int, int, t_mlx*);
+	int			(*f[6])(t_mandel*, int, int, t_mlx*);
 	int			col;
 	int			x;
 

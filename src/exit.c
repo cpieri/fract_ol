@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 13:59:28 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 13:37:52 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/28 08:35:35 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 
 void	ft_exit(t_mlx *mlx)
 {
-	free(mlx->color);
 	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx_destroy_image(mlx->mlx, mlx->img.img_s);
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	free(mlx->mlx);
-	free(mlx);
+	free(mlx->color);
 	exit(0);
 }
 
 void	reset(t_mlx *mlx)
 {
 	mlx->zoom = 1;
-	mlx->mv.x = (mlx->fractal != 1 && mlx->fractal != 4) ? -0.5 : 0;
+	mlx->mv.x = (mlx->fractal != 1 && mlx->fractal != 4
+			&& mlx->fractal != 5 && mlx->fractal != 6) ? -0.5 : 0;
 	mlx->mv.y = 0;
 	free(mlx->color);
-	set_color(mlx, 200, 0);
+	set_color(mlx, PRES, 0);
 	generate_new_image(mlx);
 }
 

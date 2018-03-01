@@ -6,18 +6,12 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:29:27 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 13:37:21 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/28 08:32:13 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "fractol.h"
-
-void			move_re(int av, t_mlx *mlx)
-{
-	mlx->mv.x += ((av == 0) ? 0.05 : -0.05) / mlx->zoom;
-	generate_new_image(mlx);
-}
 
 static void		move_im(int av, t_mlx *mlx)
 {
@@ -46,6 +40,26 @@ static void		select_index(void (*f[5][3])(int, t_mlx*), int *neg, int key)
 	f[4][2] = NULL;
 }
 
+static int		change_fractal(int key, t_mlx *mlx)
+{
+	if (key == 18)
+		mlx->fractal = 0;
+	else if (key == 19)
+		mlx->fractal = 1;
+	else if (key == 20)
+		mlx->fractal = 2;
+	else if (key == 21)
+		mlx->fractal = 3;
+	else if (key == 23)
+		mlx->fractal = 4;
+	else if (key == 22)
+		mlx->fractal = 5;
+	else if (key == 26)
+		mlx->fractal = 6;
+	reset(mlx);
+	return (0);
+}
+
 static int		event(int key, t_mlx *mlx)
 {
 	if (key == EXIT)
@@ -54,20 +68,9 @@ static int		event(int key, t_mlx *mlx)
 		reset(mlx);
 	else if (key == SPACE)
 		mlx->mv_julia = (mlx->mv_julia == 0) ? 1 : 0;
-	else if (key == 18 || key == 19 || key == 20 || key == 21 || key == 23)
-	{
-		if (key == 18)
-			mlx->fractal = 0;
-		else if (key == 19)
-			mlx->fractal = 1;
-		else if (key == 20)
-			mlx->fractal = 2;
-		else if (key == 21)
-			mlx->fractal = 3;
-		else if (key == 23)
-			mlx->fractal = 4;
-		reset(mlx);
-	}
+	else if (key == 18 || key == 19 || key == 20 || key == 21 || key == 23
+			|| key == 22 || key == 26)
+		change_fractal(key, mlx);
 	else if (key == 17 || key == 11 || key == 5
 			|| key == 13 || key == 12 || key == 0)
 		event_color(key, mlx);
@@ -85,7 +88,6 @@ int				key_event(int key, void *init)
 	i = 0;
 	neg = 0;
 	select_index(f, &neg, key);
-	event(key, mlx);
 	while (key != ft_atoi((char*)f[i][0]) && key != ft_atoi((char*)f[i][1]))
 	{
 		if (i > 3)
@@ -95,5 +97,6 @@ int				key_event(int key, void *init)
 	if (i < 4)
 		(*f[i][2])(neg, mlx);
 	ft_free_f(f);
+	event(key, mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 09:15:09 by cpieri            #+#    #+#             */
-/*   Updated: 2018/02/27 13:41:27 by cpieri           ###   ########.fr       */
+/*   Updated: 2018/02/28 08:36:34 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define KEYPRESS			2
 # define KEYPRESSMASK		(1L<<0)
 # define POINTERMOTIONMASK	(1L<<6)
+# define PRES				200
 # define EXIT				53
 # define RESET				15
 # define SPACE				49
@@ -106,7 +107,9 @@ int					set_color(t_mlx *mlx, int nb, int av);
 int					calc_color(t_mandel *nb, t_mlx *mlx);
 int					ship_color(t_mandel *nb, t_mlx *mlx);
 int					init_mandel_2(t_mandel *nb, int x, int y, t_mlx *mlx);
-int					init_julia_2(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_julia_ship(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_multibrot(t_mandel *nb, int x, int y, t_mlx *mlx);
+int					init_dragon(t_mandel *nb, int x, int y, t_mlx *mlx);
 void				*set_fractal(void *init);
 void				zoom(int av, t_mlx *mlx);
 void				move_re(int av, t_mlx *mlx);
